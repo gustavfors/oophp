@@ -1,3 +1,3 @@
-#### Footer col 1
+#### Om kursen
 
-Med brödtext i ett stycke som säger något trevligt om just detta block, eller kanske en lista av länkar.
+Kursen Objektorienterade webbteknologier, fokuserar på objektorienterade programmeringstekniker i programmeringsspråket PHP.

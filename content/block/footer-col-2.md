@@ -1,3 +1,3 @@
-#### Footer col 2
+#### Om programmet
 
-Med brödtext i ett stycke som säger något trevligt om just detta block, eller kanske en lista av länkar.
+Utbildningen har bredden som i traditionell utbildning inom programvaruteknik, men blir spetsigare med sin inriktning på utveckling med webbteknologier.

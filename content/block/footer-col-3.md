@@ -1,3 +1,3 @@
-#### Footer col 3
+#### Om skolan
 
-Med brödtext i ett stycke som säger något trevligt om just detta block, eller kanske en lista av länkar.
+Blekinge Tekniska högskola inriktar sig särskilt på IT och hållbar utveckling av näringsliv och samhället.
