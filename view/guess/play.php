@@ -26,6 +26,11 @@ namespace Anax\View;
     <input type="submit" name="reset" value="Reset Game">
 </form>
 
+<?php if (isset($_SESSION['error'])) : ?>
+<p><?= $_SESSION['error']; ?></p>
+    <?php unset($_SESSION["error"]); ?>
+<?php endif; ?>
+
 <?php if (isset($_SESSION['feedback'])) : ?>
 <p><?= $_SESSION['feedback']; ?></p>
     <?php unset($_SESSION["feedback"]); ?>

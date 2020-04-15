@@ -13,27 +13,24 @@ $app->router->post("guess/process", function () use ($app) {
 
     if (isset($_POST['reset'])) {
         $_SESSION["game"] = new \Gufo\Guess\Guess();
-        return $app->response->redirect("guess/play");
     }
 
     if (isset($_POST['guess'])) {
         try {
             $_SESSION['feedback'] = $_SESSION["game"]->makeGuess($_POST['input']);
             return $app->response->redirect("guess/play");
-        } catch (GuessException $e) {
-            echo 'Caught exception: ', get_class($e), ": ",  $e->getMessage(), "\n";
-            echo '<br>';
-            echo '<a href="index.php">return to game</a>';
+        } catch (\Gufo\Guess\GuessException $e) {
+            $_SESSION['error'] = 'Caught exception: ' . get_class($e) . ": " .  $e->getMessage();
+            return $app->response->redirect("guess/play");
         }
     }
 
     if (isset($_POST['cheat'])) {
         $_SESSION['cheat'] = $_SESSION["game"]->number();
-        return $app->response->redirect("guess/play");
     }
+
+    return $app->response->redirect("guess/play");
 });
-
-
 
 
 
