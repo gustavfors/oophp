@@ -31,7 +31,6 @@ $app->router->post("guess/process", function () use ($app) {
         $_SESSION['cheat'] = $_SESSION["game"]->number();
         return $app->response->redirect("guess/play");
     }
-
 });
 
 
