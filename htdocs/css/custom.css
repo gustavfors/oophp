@@ -1,0 +1,60 @@
+.setup {
+    display: flex;
+    flex-direction: column;
+}
+
+.setup input[type=text],
+.setup input[type=number],
+.setup select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.setup input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.setup input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+table, td, th {  
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 15px;
+}
+
+
+.game-board {
+  display: flex;
+  white-space: nowrap;
+}
+
+.game-info {
+  min-width: 125px;
+  max-width: 125px;
+}
+
+.mt-1 {
+  margin-top: 16px;
+}

@@ -77,6 +77,9 @@ $route = "route-" . str_replace("/", "-", $di->get("request")->getRoute());
     <style><?= $style ?></style>
     <?php endif; ?>
 
+    <link rel="stylesheet" type="text/css" href="<?= asset("css/custom.css") ?>">
+    
+
 </head>
 
 <body <?= classList($bodyClass, $route) ?>>
