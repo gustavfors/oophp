@@ -11,12 +11,9 @@ class Guess
      * @var int $number   The current secret number.
      * @var int $tries    Number of tries a guess has been made.
      */
-
     private $number;
     private $tries;
     private $gameOver = false;
-
-
 
     /**
      * Constructor to initiate the object with current game settings,
@@ -27,7 +24,6 @@ class Guess
      * @param int $tries  Number of tries a guess has been made,
      *                    default 6.
      */
-
     public function __construct(int $number = -1, int $tries = 6)
     {
         $this->tries = $tries;
@@ -50,9 +46,6 @@ class Guess
         return rand(1, 99);
     }
 
-
-
-
     /**
      * Get number of tries left.
      *
@@ -63,9 +56,6 @@ class Guess
     {
         return $this->tries;
     }
-
-
-
 
     /**
      * Get the secret number.

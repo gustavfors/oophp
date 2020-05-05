@@ -58,3 +58,12 @@ th, td {
 .mt-1 {
   margin-top: 16px;
 }
+
+.histogram-container {
+  display: flex;
+}
+
+.histogram {
+  min-width: 175px;
+
+}
