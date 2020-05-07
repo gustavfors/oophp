@@ -9,6 +9,8 @@ if (!$res) {
 ?>
 <div class="movie-list">
 
+<h1>Update movie</h1>
+
 <form action="<?= url("movie/process") ?>" method="POST">
     <input type="hidden" name="id" value="<?= $res[0]->id; ?>"
     <p>Movie title: <br><input type="text" name="title" autocomplete="off" required value="<?= $res[0]->title; ?>"></p>
