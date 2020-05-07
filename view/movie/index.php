@@ -31,15 +31,13 @@ namespace Anax\View;
         <td><img class="thumb" src="<?= $row->image ?>"></td>
         <td><?= $row->title ?></td>
         <td><?= $row->year ?></td>
-        <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+        <td><a href="<?= url("movie/edit?id={$row->id}") ?>">Edit</a> | <a href="<?= url("movie/process?delete={$row->id}") ?>">Delete</a></td>
     </tr>
 <?php endforeach; ?>
 </table>
 <?php else : ?>
-<p>Nothing matches your search...</p>
+<p>No movies to display...</p>
 <?php endif; ?>
 
-<form>
-    <input type="submit" value="Add movie">
-</form>
+<a href="<?= url("movie/create") ?>">Add new movie</button>
 </div>
