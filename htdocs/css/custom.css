@@ -67,3 +67,18 @@ th, td {
   min-width: 175px;
 
 }
+
+.thumb {
+  max-width: 150px;
+  max-height: 100px;
+}
+
+.movie-list {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.movie-list form {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
