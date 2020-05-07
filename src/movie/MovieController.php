@@ -30,23 +30,6 @@ class MovieController implements AppInjectableInterface
         ]);
     }
 
-    public function testAction()
-    {
-
-        $filter = "";
-
-        $sql = "SELECT * FROM movie WHERE title LIKE ? OR year LIKE ?;";
-        $this->app->db->connect();
-        $res = $this->app->db->executeFetchAll($sql, [
-            "%" . $filter . "%",
-            "%" . $filter . "%"
-        ]);
-
-        var_dump($res);
-
-        return "Sommartider!";
-    }
-
     public function createAction()
     {
 
@@ -118,7 +101,6 @@ class MovieController implements AppInjectableInterface
 
         //Delete existing movie
         if ($this->app->request->getGet('delete') != null) {
-
             $id = htmlspecialchars($this->app->request->getGet('delete'));
 
             $sql = "DELETE FROM movie WHERE id = ?";
@@ -127,7 +109,5 @@ class MovieController implements AppInjectableInterface
 
             return $this->app->response->redirect("movie/");
         }
-
     }
-
 }
