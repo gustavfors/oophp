@@ -9,6 +9,8 @@ namespace Anax\View;
 ?>
 <div class="movie-list">
 
+<h1>Add new movie</h1>
+
 <form action="<?= url("movie/process") ?>" method="POST">
 
     <p>Movie title: <br><input type="text" name="title" autocomplete="off" required></p>

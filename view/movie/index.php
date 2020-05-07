@@ -8,6 +8,7 @@ namespace Anax\View;
 
 ?>
 <div class="movie-list">
+<h1>Movie list</h1>
 <form>
     <input type="text" placeholder="Search by year or title" name="search" autocomplete="off">
     <input type="submit" value="search">
@@ -38,6 +39,7 @@ namespace Anax\View;
 <?php else : ?>
 <p>No movies to display...</p>
 <?php endif; ?>
-
-<a href="<?= url("movie/create") ?>">Add new movie</button>
+<div class="button">
+<a href="<?= url("movie/create") ?>">Add new movie</a>
+</div>
 </div>

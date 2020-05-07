@@ -83,5 +83,10 @@ return [
             "url" => "dicev2/init",
             "title" => "Spela dice100 v2",
         ],
+        [
+            "text" => "Movie",
+            "url" => "movie",
+            "title" => "movie crud",
+        ],
     ],
 ];
