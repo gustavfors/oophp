@@ -32,7 +32,6 @@ class MovieController implements AppInjectableInterface
 
     public function createAction()
     {
-
         $title = "create";
 
         $this->app->page->add("movie/create");
@@ -43,7 +42,6 @@ class MovieController implements AppInjectableInterface
 
     public function editAction()
     {
-
         $title = "edit";
 
         $id = (int)htmlspecialchars($this->app->request->getGet('id'));

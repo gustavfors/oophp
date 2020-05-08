@@ -88,5 +88,29 @@ return [
             "url" => "movie",
             "title" => "movie crud",
         ],
+        [
+            "text" => "MyTextFilter",
+            "url" => "mytextfilter",
+            "title" => "my text filter",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "bbcode",
+                        "url" => "mytextfilter?filter=bbcode",
+                        "title" => "bbcode",
+                    ],
+                    [
+                        "text" => "clickable",
+                        "url" => "mytextfilter?filter=link",
+                        "title" => "clickable",
+                    ],
+                    [
+                        "text" => "markdown",
+                        "url" => "mytextfilter?filter=markdown",
+                        "title" => "markdown",
+                    ],
+                ],
+            ],
+        ],
     ],
 ];

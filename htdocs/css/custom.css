@@ -82,3 +82,7 @@ th, td {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+
+.pt-1 {
+  padding-top: 20px;
+}
