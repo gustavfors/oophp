@@ -1,5 +1,7 @@
 <?php
+
 namespace Anax\View;
+
 ?>
 
 <table>

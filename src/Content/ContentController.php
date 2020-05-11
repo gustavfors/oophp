@@ -2,8 +2,6 @@
 
 namespace Gufo\Content;
 
-use Gufo\MyTextFilter;
-
 use Anax\Commons\AppInjectableInterface;
 use Anax\Commons\AppInjectableTrait;
 
@@ -24,12 +22,9 @@ class ContentController implements AppInjectableInterface
     {
         $title = "overview";
 
-        $sql = "SELECT * FROM content;";
-        $this->app->db->connect();
-        $res = $this->app->db->executeFetchAll($sql);
+        $res = $this->contentManager->getAll();
 
         $this->app->page->add("content/header");
-
         $this->app->page->add("content/index", [
             "resultset" => $res
         ]);
@@ -37,6 +32,8 @@ class ContentController implements AppInjectableInterface
         return $this->app->page->render([
             "title" => $title,
         ]);
+
+        return "Hello";
     }
 
     public function pageAction($show = "all")
@@ -49,19 +46,27 @@ class ContentController implements AppInjectableInterface
 
         if ($show == "all") {
             $res = $this->contentManager->getPages();
-             $this->app->page->add("content/pages", [
+            $this->app->page->add("content/pages", [
                 "resultset" => $res
             ]);
         } else {
             $res = $this->contentManager->getItemByPath($path);
+
+            if (!$res) {
+                $res = $this->contentManager->getItemBySlug($path);
+            }
             
             $html = $this->filter->parse($res->data, $res->filter);
 
             $res->data = $html;
 
-            $this->app->page->add("content/page", [
+            if ($res->deleted) {
+                $this->app->page->add("content/404");
+            } else {
+                $this->app->page->add("content/page", [
                 "resultset" => $res
-            ]);
+                ]);
+            }
         } 
 
         return $this->app->page->render([
@@ -79,7 +84,7 @@ class ContentController implements AppInjectableInterface
 
         if ($show == "all") {
             $res = $this->contentManager->getPosts();
-             $this->app->page->add("content/blog", [
+            $this->app->page->add("content/blog", [
                 "resultset" => $res
             ]);
         } else {
@@ -89,9 +94,13 @@ class ContentController implements AppInjectableInterface
 
             $res->data = $html;
 
-            $this->app->page->add("content/blogpost", [
-                "resultset" => $res
-            ]);
+            if ($res->deleted) {
+                $this->app->page->add("content/404");
+            } else {
+                $this->app->page->add("content/blogpost", [
+                    "resultset" => $res
+                ]);
+            }
         } 
 
         return $this->app->page->render([
@@ -100,17 +109,23 @@ class ContentController implements AppInjectableInterface
     }
     
 
-    public function createActionGet()
+    public function createAction()
     {
-        $title = "create";
+        if ($this->app->request->getPost('contentTitle') != null) {
+            $res = $this->contentManager->create(htmlspecialchars($this->app->request->getPost('contentTitle')));
 
-        $this->app->page->add("content/header");
+            return $this->app->response->redirect("content/update?id={$res}");
+        } else {
+            $title = "create";
 
-        $this->app->page->add("content/create");
+            $this->app->page->add("content/header");
 
-        return $this->app->page->render([
-            "title" => $title,
-        ]);
+            $this->app->page->add("content/create");
+
+            return $this->app->page->render([
+                "title" => $title,
+            ]);
+        }
     }
 
     public function deleteActionGet()
@@ -138,20 +153,9 @@ class ContentController implements AppInjectableInterface
 
     public function deleteActionPost()
     {
-        $title = "delete";
-
         $this->contentManager->delete(htmlspecialchars($this->app->request->getPost('contentId')));
 
         return $this->app->response->redirect("content");
-    }
-
-    public function createActionPost()
-    {
-        $title = "create";
-
-        $res = $this->contentManager->create(htmlspecialchars($this->app->request->getPost('contentTitle')));
-
-        return $this->app->response->redirect("content/update?id={$res}");
     }
 
     public function updateActionGet()
@@ -162,7 +166,7 @@ class ContentController implements AppInjectableInterface
             $id = htmlspecialchars($this->app->request->getGet('id'));
 
             $res = $this->contentManager->getItemById($id);
-
+            
             $data = [
                 "id" => $res->id,
                 "title" => $res->title,
@@ -185,9 +189,7 @@ class ContentController implements AppInjectableInterface
 
     public function updateActionPost()
     {
-        $title = "update";
-
-        $res = $this->contentManager->update(
+        $this->contentManager->update(
             $this->app->request->getPost()
         );
 

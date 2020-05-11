@@ -7,7 +7,8 @@ class ContentManager
 
     private $app;
 
-    public function __construct($app) {
+    public function __construct($app)
+    {
         $this->app = $app;
     }
 
@@ -21,18 +22,17 @@ class ContentManager
     public function getPages()
     {
         $sql = <<<EOD
-                SELECT
-                *,
-                CASE 
-                    WHEN (deleted <= NOW()) THEN "isDeleted"
-                    WHEN (published <= NOW()) THEN "isPublished"
-                    ELSE "notPublished"
-                END AS status
-                FROM content
-                WHERE type=?
-                ;
-                EOD;
-
+SELECT
+    *,
+    CASE 
+        WHEN (deleted <= NOW()) THEN "isDeleted"
+        WHEN (published <= NOW()) THEN "isPublished"
+        ELSE "notPublished"
+    END AS status
+FROM content
+WHERE type=?
+;
+EOD;
         $this->app->db->connect();
         return $this->app->db->executeFetchAll($sql, ["page"]);
     }
@@ -40,15 +40,15 @@ class ContentManager
     public function getPosts()
     {
         $sql = <<<EOD
-                SELECT
-                    *,
-                    DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%dT%TZ') AS published_iso8601,
-                    DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%d') AS published
-                FROM content
-                WHERE type=?
-                ORDER BY published DESC
-                ;
-                EOD;
+SELECT
+    *,
+    DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%dT%TZ') AS published_iso8601,
+    DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%d') AS published
+FROM content
+WHERE type=?
+ORDER BY published DESC
+;
+EOD;
 
         $this->app->db->connect();
         return $this->app->db->executeFetchAll($sql, ["post"]);
@@ -86,11 +86,16 @@ class ContentManager
 
     public function update($data)
     {
-
         $params = $data;
 
         if (!$params["contentSlug"]) {
             $params["contentSlug"] = $this->slugify($params["contentTitle"]);
+        }
+
+        $res = $this->getItemBySlug($params["contentSlug"]);
+
+        if ($res) {
+            $params["contentSlug"] = $params["contentSlug"] . $params['contentId'];
         }
 
         if (!$params["contentPath"]) {
@@ -99,6 +104,7 @@ class ContentManager
 
         $sql = "UPDATE content SET title=?, path=?, slug=?, data=?, type=?, filter=?, published=? WHERE id = ?;";
         $this->app->db->connect();
+        
         $this->app->db->execute($sql, [
             $params["contentTitle"],
             $params["contentPath"],

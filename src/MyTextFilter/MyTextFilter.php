@@ -2,8 +2,6 @@
 
 namespace Gufo\MyTextFilter;
 
-use Michelf\MarkdownExtra;
-
 /**
  * Filter and format text content.
  *
@@ -90,12 +88,12 @@ class MyTextFilter
     public function makeClickable($text)
     {
         return preg_replace_callback(
-        '#\b(?<![href|src]=[\'"])https?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#',
-        function ($matches) {
-            return "<a href=\'{$matches[0]}\'>{$matches[0]}</a>";
-        },
-        $text
-    );
+            '#\b(?<![href|src]=[\'"])https?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#',
+            function ($matches) {
+                return "<a href=\'{$matches[0]}\'>{$matches[0]}</a>";
+            },
+            $text
+        );
     }
 
 
@@ -109,7 +107,8 @@ class MyTextFilter
      */
     public function markdown($text)
     {
-        return MarkdownExtra::defaultTransform($text);
+        $markdown = new \Michelf\MarkdownExtra();
+        return $markdown::defaultTransform($text);
     }
 
     /**

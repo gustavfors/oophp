@@ -1,5 +1,7 @@
 <?php
+
 namespace Anax\View;
+
 ?>
 
 <h1>Showing off Markdown</h1>

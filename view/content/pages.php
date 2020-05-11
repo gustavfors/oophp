@@ -1,5 +1,7 @@
 <?php
+
 namespace Anax\View;
+
 ?>
 
 <table>
@@ -15,7 +17,11 @@ namespace Anax\View;
     $id++; ?>
     <tr>
         <td><?= $row->id ?></td>
+        <?php if (!$row->path) : ?>
+        <td><a href="page/<?= $row->slug ?>"><?= $row->title ?></a></td>
+        <?php else : ?>
         <td><a href="page/<?= $row->path ?>"><?= $row->title ?></a></td>
+        <?php endif; ?>
         <td><?= $row->type ?></td>
         <td><?= $row->status ?></td>
         <td><?= $row->published ?></td>
