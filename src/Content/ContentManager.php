@@ -45,8 +45,8 @@ SELECT
     DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%dT%TZ') AS published_iso8601,
     DATE_FORMAT(COALESCE(updated, published), '%Y-%m-%d') AS published
 FROM content
-WHERE type=?
-ORDER BY published DESC
+WHERE type=? AND deleted IS NULL
+ORDER BY created DESC
 ;
 EOD;
 
