@@ -7,7 +7,7 @@ namespace Anax\View;
 <form method="post">
     <fieldset>
     <legend>Edit</legend>
-    <input type="hidden" name="contentId" value="<?= $id ?>"/>
+    <input type="hidden" name="contentId" value="<?= $id ?>" required/>
 
     <p>
         <label>Title:<br> 
@@ -36,8 +36,8 @@ namespace Anax\View;
      </p>
 
      <p>
-         <label>Filter:<br> 
-         <input type="text" name="contentFilter" value="<?= $filter ?>"/>
+         <label>Filter: (bbcode, link, markdown, nl2br)<br> 
+         <input type="text" name="contentFilter" value="<?= $filter ?>" required autocomplete="off" placeholder="bbcode,nl2br"/>
      </p>
 
      <p>
