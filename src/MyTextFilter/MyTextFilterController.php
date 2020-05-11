@@ -26,13 +26,14 @@ class MyTextFilterController implements AppInjectableInterface
         
         $html = $filter->parse($text, "{$page}");
 
+        $this->app->page->add("mytextfilter/header");
         $this->app->page->add("mytextfilter/{$page}", [
             "text" => $text,
             "html" => $html
         ]);
+        
         return $this->app->page->render([
             "title" => $title,
         ]);
     }
-
 }

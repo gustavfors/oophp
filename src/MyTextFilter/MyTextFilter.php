@@ -34,11 +34,17 @@ class MyTextFilter
      *
      * @return string with the formatted text.
      */
-    public function parse($text, $filter)
+    public function parse($text, $filters)
     {
-        $func = $this->filters[$filter];
-        return $this->$func($text);
+        $filters = explode(",", $filters);
+        $text = $text;
 
+        foreach ($filters as $filter) {
+            $func = $this->filters[$filter];
+            $text = $this->$func($text);
+        }
+
+        return $text;
     }
 
 
@@ -105,8 +111,6 @@ class MyTextFilter
     {
         return MarkdownExtra::defaultTransform($text);
     }
-
-
 
     /**
      * For convenience access to nl2br formatting of text.
