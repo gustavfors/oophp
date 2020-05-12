@@ -100,6 +100,11 @@ EOD;
 
         if (!$params["contentPath"]) {
             $params["contentPath"] = null;
+        } else {
+            $res = $this->getItemByPath($params["contentPath"]);
+            if ($res) {
+                $params["contentPath"] = $params["contentPath"] . $params['contentId'];
+            }
         }
 
         $sql = "UPDATE content SET title=?, path=?, slug=?, data=?, type=?, filter=?, published=? WHERE id = ?;";
